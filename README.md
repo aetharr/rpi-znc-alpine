@@ -5,7 +5,7 @@ This image contains the same features as my [other ZNC container](https://github
 This has been tested on a Raspberry Pi 3 running Docker 1.11.1
 
 ## Running the bouncer
-`docker run -d -p 8080:8080 aetharr/rpi-znc`
+`docker run -d -p 8080:8080 aetharr/rpi-znc-alpine`
 
 ## Regarding the Config File
 When the container has been run for the first time, it will detect whether there is a config file in the appropriate place and if not, add the default one. 
@@ -13,7 +13,7 @@ This allows you to specify one using a volume for easier access if you wish. It 
 
 ## Using a Volume
 If you'd like to map the ZNC config directory to one of your choosing, you can make use of a volume, simple amend the command as such.
-`docker run -d  -v $HOME/znc:/home/znc/.znc -p 8080:8080 aetharr/rpi-znc`
+`docker run -d  -v $HOME/znc:/home/znc/.znc -p 8080:8080 aetharr/rpi-znc-alpine`
 
 ## Going Forward
 To configure the bouncer while running, visit `http://<hostname>:8080`
