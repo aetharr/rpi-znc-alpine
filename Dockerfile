@@ -19,8 +19,13 @@ RUN apk update && \
     ./configure --enable-python && \
     make && make install && \
 
-    cd .. && \
-    wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check-certificate && \
+    apk del -r --purge alpine-sdk && \
+    apk del -r --purge openssl-dev && \
+
+    adduser -D -s /bin/bash -h /home/znc znc
+
+# Add the weblog plugin to the mix
+RUN wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check-certificate && \
     mv master.zip znc-weblog.zip && \
     unzip -q znc-weblog.zip && \
     mkdir /usr/local/znc && \
@@ -28,11 +33,7 @@ RUN apk update && \
     cd znc-weblog* && \
     mv tmpl /usr/local/znc/weblog/ && \
     mv weblog.py /usr/local/znc && \
-
-    apk del -r --purge alpine-sdk && \
-    apk del -r --purge openssl-dev && \
-
-    adduser -D -s /bin/bash -h /home/znc znc
+    chmod +x /usr/local/znc/weblog.py
 
 # Copy in our default config and startup script
 COPY ./files/start-znc.sh /usr/local/bin/
