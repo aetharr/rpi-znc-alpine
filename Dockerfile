@@ -1,6 +1,6 @@
 FROM hypriot/rpi-alpine-scratch
 
-MAINTAINER AEtharr <aetharr@gmail.com>
+LABEL maintainer="AEtharr <aetharr@gmail.com>"
 
 # Prepare the Image for building ZNC from source
 RUN apk update && \
@@ -8,10 +8,26 @@ RUN apk update && \
     apk add wget && \
     apk add icu-dev && \
     apk add openssl-dev && \
-    wget http://znc.in/releases/znc-latest.tar.gz && \
+
+    apk add python3 && \
+    apk add python3-dev && \
+    apk add perl && \
+
+    wget http://znc.in/releases/znc-latest.tar.gz --no-check-certificate && \
     tar -zxf znc-latest.tar.gz && \
     cd znc* && \
-    ./configure && make && make install && \
+    ./configure --enable-python && \
+    make && make install && \
+
+    cd .. && \
+    wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check-certificate && \
+    mv master.zip znc-weblog.zip && \
+    unzip -q znc-weblog.zip && \
+    mkdir /usr/local/znc/weblog && \
+    cd znc-weblog* && \
+    mv tmpl /usr/local/znc/weblog/ && \
+    mv weblog.py /usr/local/znc && \
+
     apk del -r --purge alpine-sdk && \
     apk del -r --purge openssl-dev && \
 
