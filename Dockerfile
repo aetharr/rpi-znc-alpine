@@ -23,6 +23,7 @@ RUN apk update && \
     wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check-certificate && \
     mv master.zip znc-weblog.zip && \
     unzip -q znc-weblog.zip && \
+    mkdir /usr/local/znc && \
     mkdir /usr/local/znc/weblog && \
     cd znc-weblog* && \
     mv tmpl /usr/local/znc/weblog/ && \
