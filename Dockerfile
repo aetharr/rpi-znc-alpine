@@ -31,9 +31,9 @@ RUN wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check
     mkdir /usr/local/znc && \
     mkdir /usr/local/znc/weblog && \
     cd znc-weblog* && \
-    mv tmpl /usr/local/znc/weblog/ && \
-    mv weblog.py /usr/local/znc && \
-    chmod +x /usr/local/znc/weblog.py
+    mv tmpl /usr/local/lib/znc/weblog/ && \
+    mv weblog.py /usr/local/lib/znc && \
+    chmod +x /usr/local/lib/znc/weblog.py
 
 # Copy in our default config and startup script
 COPY ./files/start-znc.sh /usr/local/bin/
