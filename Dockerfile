@@ -18,22 +18,12 @@ RUN apk update && \
     cd znc* && \
     ./configure --enable-python && \
     make && make install && \
+    rm -rf /znc* && \
 
     apk del -r --purge alpine-sdk && \
     apk del -r --purge openssl-dev && \
 
     adduser -D -s /bin/bash -h /home/znc znc
-
-# Add the weblog plugin to the mix
-RUN wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check-certificate && \
-    mv master.zip znc-weblog.zip && \
-    unzip -q znc-weblog.zip && \
-    mkdir /usr/local/znc && \
-    mkdir /usr/local/znc/weblog && \
-    cd znc-weblog* && \
-    mv tmpl /usr/local/lib/znc/weblog/ && \
-    mv weblog.py /usr/local/lib/znc && \
-    chmod +x /usr/local/lib/znc/weblog.py
 
 # Copy in our default config and startup script
 COPY ./files/start-znc.sh /usr/local/bin/
@@ -45,6 +35,19 @@ RUN chown znc:znc /home/znc/default.conf
 # Actually create the .znc folder with relative permissions
 RUN mkdir -p /home/znc/.znc && \
     chown znc:znc -Rf /home/znc/.znc
+
+# Add the weblog plugin to the mix and fix permissions again
+RUN wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check-certificate && \
+    mv master.zip znc-weblog.zip && \
+    unzip -q znc-weblog.zip && \
+    mkdir /home/znc/.znc/modules && \
+    mkdir /home/znc/.znc/modules/weblog && \
+    cd znc-weblog* && \
+    mv tmpl /home/znc/.znc/modules/weblog && \
+    mv weblog.py /home/znc/.znc/modules/weblog && \
+    chmod +x /home/znc/.znc/modules/weblog.py && \
+    chown znc:znc -Rf /home/znc/.znc && \
+    rm -rf /znc*
 
 USER znc
 
