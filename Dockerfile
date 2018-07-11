@@ -44,7 +44,7 @@ RUN wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check
     mkdir /home/znc/.znc/modules/weblog && \
     cd znc-weblog* && \
     mv tmpl /home/znc/.znc/modules/weblog && \
-    mv weblog.py /home/znc/.znc/modules/weblog && \
+    mv weblog.py /home/znc/.znc/modules && \
     chmod +x /home/znc/.znc/modules/weblog.py && \
     chown znc:znc -Rf /home/znc/.znc && \
     rm -rf /znc*
