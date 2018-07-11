@@ -1,6 +1,6 @@
 FROM hypriot/rpi-alpine-scratch
 
-MAINTAINER AEtharr <aetharr@gmail.com>
+LABEL maintainer="AEtharr <aetharr@gmail.com>"
 
 # Prepare the Image for building ZNC from source
 RUN apk update && \
@@ -12,6 +12,8 @@ RUN apk update && \
     tar -zxf znc-latest.tar.gz && \
     cd znc* && \
     ./configure && make && make install && \
+    rm -rf /znc* && \
+
     apk del -r --purge alpine-sdk && \
     apk del -r --purge openssl-dev && \
 
