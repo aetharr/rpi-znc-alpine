@@ -1,4 +1,4 @@
-FROM hypriot/rpi-alpine-scratch
+FROM alpine
 
 LABEL maintainer="AEtharr <aetharr@gmail.com>"
 
@@ -23,7 +23,7 @@ RUN apk update && \
     apk del -r --purge alpine-sdk && \
     apk del -r --purge openssl-dev && \
 
-    adduser -D -s /bin/bash -h /home/znc znc
+    adduser -D -s /bin/sh -h /home/znc znc
 
 # Copy in our default config and startup script
 COPY ./files/start-znc.sh /usr/local/bin/
@@ -37,7 +37,7 @@ RUN mkdir -p /home/znc/.znc && \
     chown znc:znc -Rf /home/znc/.znc
 
 # Add the weblog plugin to the mix and fix permissions again
-RUN wget https://github.com/MuffinMedic/znc-weblog/archive/master.zip --no-check-certificate && \
+RUN wget https://github.com/LorenzoAncora/znc-weblog/archive/master.zip --no-check-certificate && \
     mv master.zip znc-weblog.zip && \
     unzip -q znc-weblog.zip && \
     mkdir /home/znc/.znc/modules && \
