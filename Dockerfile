@@ -13,10 +13,10 @@ RUN apk update && \
     cd znc* && \
     ./configure && make && make install && \
     rm -rf /znc* && \
-
+    \
     apk del -r --purge alpine-sdk && \
     apk del -r --purge openssl-dev && \
-
+    \
     adduser -D -s /bin/sh -h /home/znc znc
 
 # Copy in our default config and startup script
