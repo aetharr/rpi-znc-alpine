@@ -8,21 +8,21 @@ RUN apk update && \
     apk add wget && \
     apk add icu-dev && \
     apk add openssl-dev && \
-
+    \
     apk add python3 && \
     apk add python3-dev && \
     apk add perl && \
-
+    \
     wget http://znc.in/releases/znc-latest.tar.gz --no-check-certificate && \
     tar -zxf znc-latest.tar.gz && \
     cd znc* && \
     ./configure --enable-python && \
     make && make install && \
     rm -rf /znc* && \
-
+    \
     apk del -r --purge alpine-sdk && \
     apk del -r --purge openssl-dev && \
-
+    \
     adduser -D -s /bin/sh -h /home/znc znc
 
 # Copy in our default config and startup script
