@@ -33,8 +33,10 @@ COPY ./files/default.conf /home/znc/
 RUN chown znc:znc /home/znc/default.conf
 
 # Actually create the .znc folder with relative permissions
-RUN mkdir -p /home/znc/.znc && \
-    chown znc:znc -Rf /home/znc/.znc
+# RUN mkdir -p /home/znc/.znc && \
+RUN mkdir -p /home/znc/.znc-data && \
+    ln -s /home/znc/.znc-data /home/znc/.znc && \
+    chown znc:znc -Rf /home/znc/.znc-data /home/znc/.znc
 
 # Add the weblog plugin to the mix and fix permissions again
 RUN wget https://github.com/LorenzoAncora/znc-weblog/archive/master.zip --no-check-certificate && \
