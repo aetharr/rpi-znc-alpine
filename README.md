@@ -5,6 +5,8 @@ This image contains the same features as my [other ZNC container](https://github
 This has been tested on a Raspberry Pi 3 running Docker 19.3.11
 
 ## Updates
+* 25/06/2020
+  * Finally fixed issues plaguing trying to use a bind-mount to run this container! Enjoy :)
 * 23/06/2020
   * Updated the base image to use the official Alpine image as it's more up-to-date and also supports ARMv7.
   * Fixed an oversight where the default user account was set to use /bin/bash when it should be /bin/sh.

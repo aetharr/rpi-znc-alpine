@@ -27,8 +27,10 @@ COPY ./files/default.conf /home/znc/
 RUN chown znc:znc /home/znc/default.conf
 
 # Actually create the .znc folder with relative permissions
-RUN mkdir -p /home/znc/.znc && \
-    chown znc:znc -Rf /home/znc/.znc
+# RUN mkdir -p /home/znc/.znc && \
+RUN mkdir -p /home/znc/.znc-initial && \
+    mkdir -p /home/znc/.znc && \
+    chown znc:znc -Rf /home/znc/.znc-initial /home/znc/.znc
 
 USER znc
 
