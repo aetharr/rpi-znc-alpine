@@ -14,7 +14,7 @@ RUN apk update && \
     apk add perl && \
     \
     wget https://znc.in/releases/archive/znc-1.8.1.tar.gz --no-check-certificate && \
-    tar -zxf znc-latest.tar.gz && \
+    tar -zxf znc-1.8.1.tar.gz && \
     cd znc* && \
     ./configure --enable-python && \
     make && make install && \
