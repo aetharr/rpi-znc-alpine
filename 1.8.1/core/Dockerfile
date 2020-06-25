@@ -8,7 +8,7 @@ RUN apk update && \
     apk add wget && \
     apk add icu-dev && \
     apk add openssl-dev && \
-    wget http://znc.in/releases/znc-latest.tar.gz --no-check-certificate && \
+    wget https://znc.in/releases/archive/znc-1.8.1.tar.gz --no-check-certificate && \
     tar -zxf znc-latest.tar.gz && \
     cd znc* && \
     ./configure && make && make install && \

@@ -19,8 +19,8 @@ then
   echo "Login with:"
   echo "u: admin"
   echo "p: password"
-  echo ""
   echo "CHANGE THIS!"
+  echo ""
   mkdir -p /home/znc/.znc/configs
   cp /home/znc/default.conf /home/znc/.znc/configs/znc.conf
 else
