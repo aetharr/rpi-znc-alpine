@@ -34,21 +34,21 @@ RUN chown znc:znc /home/znc/default.conf
 
 # Actually create the .znc folder with relative permissions
 # RUN mkdir -p /home/znc/.znc && \
-RUN mkdir -p /home/znc/.znc-data && \
-    ln -s /home/znc/.znc-data /home/znc/.znc && \
-    chown znc:znc -Rf /home/znc/.znc-data /home/znc/.znc
+RUN mkdir -p /home/znc/.znc-initial && \
+    mkdir -p /home/znc/.znc && \
+    chown znc:znc -Rf /home/znc/.znc-initial /home/znc/.znc
 
 # Add the weblog plugin to the mix and fix permissions again
 RUN wget https://github.com/LorenzoAncora/znc-weblog/archive/master.zip --no-check-certificate && \
     mv master.zip znc-weblog.zip && \
     unzip -q znc-weblog.zip && \
-    mkdir /home/znc/.znc/modules && \
-    mkdir /home/znc/.znc/modules/weblog && \
+    mkdir /home/znc/.znc-initial/modules && \
+    mkdir /home/znc/.znc-initial/modules/weblog && \
     cd znc-weblog* && \
-    mv tmpl /home/znc/.znc/modules/weblog && \
-    mv weblog.py /home/znc/.znc/modules && \
-    chmod +x /home/znc/.znc/modules/weblog.py && \
-    chown znc:znc -Rf /home/znc/.znc && \
+    mv tmpl /home/znc/.znc-initial/modules/weblog && \
+    mv weblog.py /home/znc/.znc-initial/modules && \
+    chmod +x /home/znc/.znc-initial/modules/weblog.py && \
+    chown znc:znc -Rf /home/znc/.znc-initial && \
     rm -rf /znc*
 
 USER znc

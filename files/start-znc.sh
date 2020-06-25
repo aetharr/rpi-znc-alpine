@@ -1,16 +1,30 @@
 #!/bin/sh
 
-# First, check that we havent added a bind-mount
-if ! diff /home/znc/.znc /home/znc/.znc-data > /dev/null 2>&1;
+# First check that the .znc folder doesnt exist already
+if [! -d "/home/znc/.znc" ];
 then
-  cp -r /home/znc/.znc-data/* /home/znc/.znc/
+  echo "~/.znc folder NOT FOUND. Creating..."
+  mkdir -p /home/znc/.znc/
+else
+  echo "~/.znc folder FOUND"
 fi
 
-# If we can't find the znc.conf file, then copy over the default config.
+# Now check for the config file. If it exists, then we can start.
+# If not, then copy over the initial files.
 if [ ! -f "/home/znc/.znc/configs/znc.conf" ];
 then
+  echo "znc.conf file NOT FOUND. Copying initial files..."
+  cp -r /home/znc/.znc-initial/* /home/znc/.znc/
+  echo "Creating default config."
+  echo "Login with:"
+  echo "u: admin"
+  echo "p: password"
+  echo ""
+  echo "CHANGE THIS!"
   mkdir -p /home/znc/.znc/configs
   cp /home/znc/default.conf /home/znc/.znc/configs/znc.conf
+else
+  echo "znc.conf file FOUND."
 fi
 
 /usr/local/bin/znc --foreground
